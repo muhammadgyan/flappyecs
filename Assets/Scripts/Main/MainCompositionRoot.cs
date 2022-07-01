@@ -1,9 +1,6 @@
-﻿using Cysharp.Threading.Tasks;
-using Engines;
+﻿using Engines;
 using Svelto.Context;
 using Svelto.ECS;
-using Svelto.ECS.Extensions.Unity;
-using Svelto.ECS.Schedulers;
 using Svelto.ECS.Schedulers.Unity;
 
 public class MainCompositionRoot : ICompositionRoot
@@ -52,6 +49,9 @@ public class MainCompositionRoot : ICompositionRoot
         
         var scoreEngine = new PlayerScoringEngine(entityConsumerFactory);
         var deadEngine = new PlayerDeadEngine(entityConsumerFactory);
+
+        var gameStateHUDUpdaterEngine = new UpdateGameStateHUDEngine(entityConsumerFactory);
+        var scoreHUDUpdaterEngine = new UpdateScoreHUDEngine(entityConsumerFactory);
         
         _enginesRoot.AddEngine(gameInitializerEngine);
         _enginesRoot.AddEngine(hudInitializerEngine);
@@ -68,5 +68,8 @@ public class MainCompositionRoot : ICompositionRoot
         
         _enginesRoot.AddEngine(scoreEngine);
         _enginesRoot.AddEngine(deadEngine);
+        
+        _enginesRoot.AddEngine(gameStateHUDUpdaterEngine);
+        _enginesRoot.AddEngine(scoreHUDUpdaterEngine);
     }
 }

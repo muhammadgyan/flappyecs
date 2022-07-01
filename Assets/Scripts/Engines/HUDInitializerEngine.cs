@@ -21,8 +21,9 @@ public class HUDInitializerEngine : IGetReadyEngine
     void InitHUD()
     {
         List<IImplementor> implementors = new List<IImplementor>();
-        implementors.Add(GameObject.FindObjectOfType<ScoreHUDImplementor>());
-        
+        implementors.Add(Object.FindObjectOfType<GameStateHUDImplementor>());
+        implementors.Add(Object.FindObjectOfType<ScoreHUDImplementor>());
+
         _entityFactory.BuildEntity<HUDEntityDescriptor>(0, ECSGroups.HUDGroup, implementors);
     }
 }

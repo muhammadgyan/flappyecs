@@ -37,9 +37,13 @@ namespace Engines
                 while (_consumer.TryDequeue(out var ent, out var id))
                 {
                     SetGameOver();
-                      
-                    var gameStateEnt = entitiesDB.QueryUniqueEntity<GameStateComponent>(ECSGroups.GameManagerGroup);
-                    Debug.Log(gameStateEnt.GameState);
+
+                    if (Debug.isDebugBuild)
+                    {
+                        var gameStateEnt = entitiesDB.QueryUniqueEntity<GameStateComponent>(ECSGroups.GameManagerGroup);
+                        Debug.Log(gameStateEnt.GameState);
+                    }
+                   
                 }
             }
 
@@ -47,6 +51,8 @@ namespace Engines
             {
                 ref var gameStateEnt = ref entitiesDB.QueryEntity<GameStateComponent>(0, ECSGroups.GameManagerGroup);
                 gameStateEnt.GameState = EnumGameState.GAMEOVER;
+                
+                entitiesDB.PublishEntityChange<GameStateComponent>(new EGID(gameStateEnt.EntRef.uniqueID, ECSGroups.GameManagerGroup));
 
                 ResetVelocity();
                 

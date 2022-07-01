@@ -7,7 +7,7 @@ using UnityEngine;
 
 public enum EnumGameState
 {
-    IDLE,
+    INTRO,
     PLAY,
     GAMEOVER
 }
@@ -16,6 +16,20 @@ public struct GameStateComponent : IEntityComponent
 {
     public EnumGameState GameState;
     public EntityReference EntRef { get; set; }
+}
+
+public struct GameStateHUDView : IEntityViewComponent
+{
+    public IGameStateListener GameStateListener;
+}
+
+public interface IGameStateListener
+{
+    public EnumGameState State
+    {
+        get;
+        set;
+    }
 }
 
 public struct InputComponent : IEntityComponent
@@ -36,6 +50,7 @@ public struct MaxVelocityComponent : IEntityComponent
 public struct ScoreComponent : IEntityComponent
 {
     public int Value;
+    public EntityReference EntRef { get; set; }
 }
 
 

@@ -56,10 +56,7 @@ namespace Engines
                 ref var scoreEnt = ref entitiesDB.QueryEntity<ScoreComponent>(0, ECSGroups.GameManagerGroup);
                 scoreEnt.Value += 1;
 
-                ref var scoreHUD = ref entitiesDB.QueryEntity<HUDView>(0, ECSGroups.HUDGroup);
-                scoreHUD.ScoreHUD.Score = scoreEnt.Value;
-
-                _consumer.Flush();
+                entitiesDB.PublishEntityChange<ScoreComponent>(new EGID(scoreEnt.EntRef.uniqueID, ECSGroups.GameManagerGroup));
             }
         }
         public EntitiesDB entitiesDB { get; set; }

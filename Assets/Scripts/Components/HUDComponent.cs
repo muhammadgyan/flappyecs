@@ -22,7 +22,8 @@ public class HUDEntityDescriptor : IEntityDescriptor
 {
     static readonly IComponentBuilder[] _componentsToBuild =
     {
-        new ComponentBuilder<HUDView>()
+        new ComponentBuilder<HUDView>(),
+        new ComponentBuilder<GameStateHUDView>()
     };
         
     public IComponentBuilder[] componentsToBuild  => _componentsToBuild;
