@@ -56,7 +56,7 @@ namespace Engines
                 ref var scoreEnt = ref entitiesDB.QueryEntity<ScoreComponent>(0, ECSGroups.GameManagerGroup);
                 scoreEnt.Value += 1;
 
-                entitiesDB.PublishEntityChange<ScoreComponent>(new EGID(scoreEnt.EntRef.uniqueID, ECSGroups.GameManagerGroup));
+                entitiesDB.PublishEntityChange<ScoreComponent>(scoreEnt.ID);
             }
         }
         public EntitiesDB entitiesDB { get; set; }

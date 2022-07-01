@@ -31,12 +31,15 @@ public class GameInitializerEngine : IQueryingEntitiesEngine, IDisposingEngine
     void InitGame()
     {
         var entity = _entityFactory.BuildEntity<GameManagerEntityDescriptor>(0, ECSGroups.GameManagerGroup);
-        Debug.Log("Game Manager ID " + entity.EGID.entityID + " Entity Reference : " + entity.reference);
-        entity.Init(new GameStateComponent{GameState = EnumGameState.INTRO, EntRef = new EntityReference(entity.EGID.entityID)});
+        
+        if(Debug.isDebugBuild)
+            Debug.Log("Game Manager ID " + entity.EGID.entityID + " Entity Reference : " + entity.reference);
+        
+        entity.Init(new GameStateComponent{GameState = EnumGameState.INTRO, ID = new EGID(0, ECSGroups.GameManagerGroup)});
         entity.Init(new InputComponent{IsJump = false});
         entity.Init(new GravityMultiplierComponent{Value = 3});
         entity.Init(new MaxVelocityComponent{Value = 10});
-        entity.Init(new ScoreComponent{Value = 0, EntRef = new EntityReference(entity.EGID.entityID)});
+        entity.Init(new ScoreComponent{Value = 0, ID = new EGID(0, ECSGroups.GameManagerGroup)});
         entity.Init(new InitialObstaclePosComponent{XStartPos = 12, XEndPos = -12});
     }
     
@@ -49,7 +52,7 @@ public class GameInitializerEngine : IQueryingEntitiesEngine, IDisposingEngine
             await UniTask.Yield(PlayerLoopTiming.Update, tokenSource.Token).SuppressCancellationThrow();
         
         GameStateComponent state = entitiesDB.QueryUniqueEntity<GameStateComponent>(ECSGroups.GameManagerGroup);
-        entitiesDB.PublishEntityChange<GameStateComponent>(new EGID(state.EntRef.uniqueID, ECSGroups.GameManagerGroup));
+        entitiesDB.PublishEntityChange<GameStateComponent>(state.ID);
         
         while (!tokenSource.IsCancellationRequested)
         {
@@ -61,7 +64,7 @@ public class GameInitializerEngine : IQueryingEntitiesEngine, IDisposingEngine
                     if (state.GameState == EnumGameState.INTRO)
                     {
                         state.GameState = EnumGameState.PLAY;
-                        entitiesDB.PublishEntityChange<GameStateComponent>(new EGID(state.EntRef.uniqueID, ECSGroups.GameManagerGroup));
+                        entitiesDB.PublishEntityChange<GameStateComponent>(state.ID);
                     }
                     else if (state.GameState == EnumGameState.GAMEOVER)
                     {

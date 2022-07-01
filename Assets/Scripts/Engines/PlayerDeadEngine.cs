@@ -51,9 +51,8 @@ namespace Engines
             {
                 ref var gameStateEnt = ref entitiesDB.QueryEntity<GameStateComponent>(0, ECSGroups.GameManagerGroup);
                 gameStateEnt.GameState = EnumGameState.GAMEOVER;
-                
-                entitiesDB.PublishEntityChange<GameStateComponent>(new EGID(gameStateEnt.EntRef.uniqueID, ECSGroups.GameManagerGroup));
 
+                entitiesDB.PublishEntityChange<GameStateComponent>(gameStateEnt.ID);
                 ResetVelocity();
                 
                 _consumer.Flush();

@@ -8,7 +8,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Implementor/GameStateHUDImplementor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Implementor/GameHUDImplementor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.sebaslab.svelto.ecs@3.3.2/Core/Streams/Consumer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.sebaslab.svelto.ecs@3.3.2/Core/Streams/GenericentityStreamConsumerFactory.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -68,7 +68,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1656668167400</updated>
-      <workItem from="1656668180088" duration="4653000" />
+      <workItem from="1656668180088" duration="8241000" />
     </task>
     <servers />
   </component>

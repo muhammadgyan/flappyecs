@@ -26,7 +26,9 @@ public class PlayerSpawnerEngine : IGetReadyEngine
     {
         var playerLoadAsync =  await _gameObjectFactory.Build("Prefabs/Player");
         GameObject player = playerLoadAsync.gameObject;
-        Debug.Log("Spawn Player");
+
+        if(Debug.isDebugBuild)
+            Debug.Log("Spawn Player");
 
         BuildPlayerEntity();
         
@@ -42,7 +44,8 @@ public class PlayerSpawnerEngine : IGetReadyEngine
             playerEntity.Init(new JumpForceComponent() {Value = 12});
             playerEntity.Init(new PlayerComponent(){ EntRef = new EntityReference(id)});
             
-            Debug.Log("Player ID : " + playerEntity.EGID + ", Entity Reference : " + playerEntity.reference);
+            if(Debug.isDebugBuild)
+                Debug.Log("Player ID : " + playerEntity.EGID + ", Entity Reference : " + playerEntity.reference);
         }
     }
 }

@@ -83,7 +83,7 @@ public class ObstacleSpawnerEngine : IQueryingEntitiesEngine, IDisposingEngine
                 
                 Vector3 curPos = obstacle.transform.position;
                 curPos.x = initialObstaclePosEnt.XStartPos;
-                curPos.y = UnityEngine.Random.Range(-2f, 2f);
+                curPos.y = UnityEngine.Random.Range(-3f, 3f);
                 obstacle.transform.position = curPos;
                 
                 List<IImplementor> implementors = new List<IImplementor>();

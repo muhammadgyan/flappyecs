@@ -15,7 +15,7 @@ public enum EnumGameState
 public struct GameStateComponent : IEntityComponent
 {
     public EnumGameState GameState;
-    public EntityReference EntRef { get; set; }
+    public EGID ID;
 }
 
 public struct GameStateHUDView : IEntityViewComponent
@@ -50,7 +50,7 @@ public struct MaxVelocityComponent : IEntityComponent
 public struct ScoreComponent : IEntityComponent
 {
     public int Value;
-    public EntityReference EntRef { get; set; }
+    public EGID ID;
 }
 
 

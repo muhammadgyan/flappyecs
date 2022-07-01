@@ -29,7 +29,7 @@ public class PlayerJumpEngine : IQueryingEntitiesEngine, IDisposingEngine
             var inputEnt =  entitiesDB.QueryUniqueEntity<InputComponent>(ECSGroups.GameManagerGroup);
             var gameStateEnt =  entitiesDB.QueryUniqueEntity<GameStateComponent>(ECSGroups.GameManagerGroup);
 
-            if (gameStateEnt.GameState == EnumGameState.PLAY && inputEnt.IsJump)
+            if (gameStateEnt.GameState != EnumGameState.GAMEOVER && inputEnt.IsJump)
             {
                 var (jumps, jumpsView, total) = entitiesDB.QueryEntities<JumpForceComponent, RigidbodyViewComponent>(ECSGroups.PlayersGroup);
                 for (int j = 0; j < total; j++)
